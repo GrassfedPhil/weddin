@@ -1,0 +1,82 @@
+@screen-xs: 480px;
+@screen-sm: 767px;
+
+#map {
+  width: 500px;
+  height: 400px;
+}
+
+#comingsoon {
+  font-size: 600%;
+  font-family: Georgia;
+
+}
+
+.nav-pills {
+  width: 100%;
+  text-align: center;
+}
+
+.nav-pills li {
+  font-size: 20px;
+  float: none;
+  display: inline-block;
+}
+
+body {
+  padding-top: 70px;
+}
+
+.wrapper {
+  margin-top: 25px;
+  position: relative;
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .overlay {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: black;
+  }
+}
+
+.overlay {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+.expectations {
+  padding: 10px 0px 10px 0px;
+  font-size: 2em;
+  text-align: center;
+}
+
+@media (max-width: @screen-xs) {
+  .i-know {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: @screen-sm) {
+  .i-know {
+    font-size: 4em;
+  }
+}
+
+@media(min-width: @screen-sm){
+  .i-know {
+    font-size: 8em;
+  }
+}
