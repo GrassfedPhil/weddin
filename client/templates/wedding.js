@@ -1,26 +1,37 @@
-RSVP = new Mongo.Collection("rsvp");
-
 if (Meteor.isClient) {
     Template.body.events({
         "submit .rsvp": function (event, template) {
             event.preventDefault();
             var recaptchaResponse = grecaptcha.getResponse();
-            var firstName = event.target.firstName.value;
-            var lastName = event.target.lastName.value;
-            var attending = event.target.attending.value;
+            var person = {};
+            person.firstName = event.target.firstName.value;
+            person.lastName = event.target.lastName.value;
+            person.attending = event.target.attending.value;
+            person.numberOfGuests = event.target.numOfGuests.value;
 
 
-            var any = Meteor.call('checkCaptcha', recaptchaResponse);
-            console.log(any);
-            //RSVP.insert({
-            //    firstName: firstName,
-            //    lastName: lastName,
-            //    attending: attending,
-            //    createdAt: new Date()
-            //});
-            template.find("form").reset();
+            Meteor.call('checkAndSave', recaptchaResponse, person, function (error) {
+                if (!error) {
+                    //show success
+                    template.find("form").reset();
+                    Session.set("errorMessage", null)
+                } else {
+                    //show error
+                    // show a nice error message
+                    Session.set("errorMessage", "Looks like something went wrong with ReCaptcha. Make sure you click on the check box above the save button." +
+                        "Sometimes it will pop up an additional question giving you a prompt and asking you to choose pictures that describe that prompt." +
+                        "Make sure you complete those questions. If all goes well, you will see a checkmark in the box.");
+                }
+
+            });
+
+
         }
 
-    })
+    });
+
+    Template.registerHelper('errorMessage',function(input){
+        return Session.get("errorMessage");
+    });
 
 }

@@ -1,17 +1,31 @@
+RSVP = new Mongo.Collection("rsvp");
+
 if (Meteor.isServer) {
     Meteor.methods({
-        checkCaptcha: function (captchaCode) {
+        checkAndSave: function (captchaCode, person) {
 
-            HTTP.post('https://www.google.com/recaptcha/api/siteverify', {
-                data: {
+            var result = HTTP.post('https://www.google.com/recaptcha/api/siteverify', {
+                params: {
                     secret: '6LfTURwTAAAAAJxqmz1loR-38bpZtfzldLc4fXAz',
                     response: captchaCode
                 }
-            }, function (response) {
-                console.log('sup');
-                console.log(response);
-                return 'hello';
             });
+
+            if(result.data['success']) {
+                console.log('success. inserting');
+                RSVP.insert({
+                    firstName: person.firstName,
+                    lastName: person.lastName,
+                    attending: person.attending,
+                    createdAt: new Date()
+                })
+            } else {
+                console.log(result.data['error-codes']);
+                throw new Meteor.Error(result.data['error-codes'],
+                    "ReCaptcha threw an error");
+            }
+            return result;
         }
+
     });
 }
