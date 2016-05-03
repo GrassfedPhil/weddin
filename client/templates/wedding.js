@@ -14,10 +14,12 @@ if (Meteor.isClient) {
                 if (!error) {
                     //show success
                     template.find("form").reset();
-                    Session.set("errorMessage", null)
+                    Session.set("errorMessage", null);
+                    Session.set("successMessage", "RSVP saved! Thanks for letting us know!");
                 } else {
                     //show error
                     // show a nice error message
+                    Session.set("successMessage", null);
                     Session.set("errorMessage", "Looks like something went wrong with ReCaptcha. Make sure you click on the check box above the save button." +
                         "Sometimes it will pop up an additional question giving you a prompt and asking you to choose pictures that describe that prompt." +
                         "Make sure you complete those questions. If all goes well, you will see a checkmark in the box.");
@@ -32,6 +34,10 @@ if (Meteor.isClient) {
 
     Template.registerHelper('errorMessage',function(input){
         return Session.get("errorMessage");
+    });
+
+    Template.registerHelper('successMessage',function(input){
+        return Session.get("successMessage");
     });
 
 }

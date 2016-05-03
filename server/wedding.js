@@ -17,6 +17,7 @@ if (Meteor.isServer) {
                     firstName: person.firstName,
                     lastName: person.lastName,
                     attending: person.attending,
+                    numberOfGuests: parseInt(person.numberOfGuests),
                     createdAt: new Date()
                 })
             } else {
