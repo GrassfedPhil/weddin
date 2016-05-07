@@ -6,7 +6,7 @@ if (Meteor.isClient) {
             var person = {};
             person.firstName = event.target.firstName.value;
             person.lastName = event.target.lastName.value;
-            person.attending = event.target.attending.value;
+            person.attending = $("input[name='attending']:checked").val();
             person.numberOfGuests = event.target.numOfGuests.value;
 
 
