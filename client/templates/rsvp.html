@@ -5,27 +5,48 @@
         RSVP
     </div>
     {{#if errorMessage}}
-        <div class="col-md-8 col-md-offset-2 alert alert-danger" role="alert">{{errorMessage}}</div>
+        <div id="message">
+            <div style="padding: 40px;">
+                <div id="inner-message" class="alert alert-error">
+                    <div class="col-md-10 col-md-offset-1 alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{errorMessage}}
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/if}}
 
     {{#if successMessage}}
-        <div class="col-md-8 col-md-offset-2 alert alert-success" role="alert">{{successMessage}}</div>
+        <div id="message">
+            <div style="padding: 40px;">
+                <div id="inner-message" class="alert alert-error">
+                    <div class="col-md-10 col-md-offset-1 alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{successMessage}}
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/if}}
 
     <form class="rsvp">
 
         <div class="row">
-            <div class="form-group col-sm-3 col-sm-offset-2">
+            <div class="form-group col-md-3 col-sm-6 col-md-offset-3">
                 <label for="firstName">First Name</label>
                 <input class="form-control formInput" type="text" id="firstName" name="firstName" placeholder="First Name"
                        required/>
             </div>
-            <div class="form-group col-sm-3">
+            <div class="form-group col-md-3 col-sm-6">
                 <label for="lastName">Last Name</label>
                 <input class="form-control formInput" type="text" id="lastName" name="lastName" placeholder="Last Name" required/>
             </div>
-            <div class="form-group col-sm-3">
-                <label for="numOfGuests">Number of Guests In Your Party</label>
+        </div>
+
+        <div class="row">
+            <div class=" form-group col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
+                <label for="numOfGuests"># of Guests In Your Party</label>
                 <select class="form-control formInput" id="numOfGuests" name="numOfGuests">
                     <option>1</option>
                     <option>2</option>
@@ -34,15 +55,13 @@
                     <option>5</option>
                 </select>
             </div>
-
-
         </div>
 
         <div class="clearfix"></div>
 
         <div class="row text-center rsvpButtons">
             <div class="center-block">
-                Select one or the other, then click the save button.
+                Select one or the other.
                 <div data-toggle="buttons">
                     <label class="btn btn-lg btn-primary active">
                         <input type="radio" name="attending" value="yes" checked> Delighted To

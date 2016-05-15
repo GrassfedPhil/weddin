@@ -14,6 +14,7 @@ if (Meteor.isClient) {
                 if (!error) {
                     //show success
                     template.find("form").reset();
+                    grecaptcha.reset();
                     Session.set("errorMessage", null);
                     Session.set("successMessage", "RSVP saved! Thanks for letting us know!");
                 } else {
